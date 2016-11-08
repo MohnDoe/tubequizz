@@ -1,4 +1,4 @@
-var _ = require('lodash'),
+ar _ = require('lodash'),
 	Sequelize = require('sequelize'),
 	Promise = require('bluebird');
 

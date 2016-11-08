@@ -22,7 +22,6 @@ module.exports = DB.define('score', {
 	classMethods: {
 		init: function() {
 			Models.score.belongsTo(Models.user);
-			Models.score.hasOne(Models.quizz);
 		},
 	},
 	instanceMethods: {

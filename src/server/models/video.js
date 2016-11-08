@@ -42,7 +42,6 @@ module.exports = DB.define('video', {
 	classMethods: {
 		init: function() {
 			Models.video.belongsTo(Models.channel);
-			Models.video.hasMany(Models.clip);
 		},
 	},
 	instanceMethods: {
