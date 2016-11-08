@@ -1,0 +1,40 @@
+{
+  "name": "tubequizz",
+  "description": "Blind-test for YouTube.",
+  "main": "app.js",
+  "authors": [
+    "JonDoe"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "youtube",
+    "clips"
+  ],
+  "homepage": "https://github.com/MohnDoe/tubequizz",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.5.0",
+    "animatewithsass": "~3.2.2",
+    "angular-animate": "~1.4.8",
+    "angular-ui-router": "~0.2.15",
+    "angular-route": "~1.4.8",
+    "angular-moment": "^0.10.3",
+    "angular-jwt": "^0.0.9",
+    "a0-angular-storage": "^0.0.15"
+  },
+  "resolutions": {
+    "angular": "~1.5.0",
+    "moment": "^2.12.0"
+  },
+  "overrides": {
+    "bootstrap-sass": {
+      "ignore": true
+    }
+  }
+}
