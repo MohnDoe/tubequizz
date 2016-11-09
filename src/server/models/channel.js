@@ -1,4 +1,4 @@
-ar _ = require('lodash'),
+var _ = require('lodash'),
 	Sequelize = require('sequelize'),
 	Promise = require('bluebird');
 
@@ -74,13 +74,11 @@ module.exports = DB.define('channel', {
 	},
 	classMethods: {
 		init: function() {
-			Models.channel.belongsToMany(Models.user, {
-				as: 'subscribers',
-				through: "is_sub",
-				// foreign_key: 'channel_id'
-			});
-			Models.channel.hasMany(Models.video);
-			Models.channel.hasOne(Models.quizz);
+			// Models.channel.belongsToMany(Models.user, {
+			// 	as: 'subscribers',
+			// 	through: "is_sub",
+			// 	// foreign_key: 'channel_id'
+			// });
 		},
 	},
 	instanceMethods: {

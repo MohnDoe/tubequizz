@@ -70,7 +70,6 @@ Promise.all(promises).then(function() {
 		console.log("Server listening on port %s", Config.server.port);
 	});
 
-	try {
 		//Authorization module
 		require('./modules/auth/index').init();
 
@@ -80,11 +79,7 @@ Promise.all(promises).then(function() {
 		//Normal routing
 		require('./modules/routes');
 
-
-	} catch (err) {
-		console.log(err);
-	}
-
 }).catch(function(err) {
-
+	console.log(err);
+	console.log(err.message);
 });

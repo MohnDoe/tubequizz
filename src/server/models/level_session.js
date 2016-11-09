@@ -15,12 +15,6 @@ module.exports = DB.define('level_session', {
 	total_points: {
 		type: Sequelize.INTEGER,
 		defaultValue: 0
-	},
-	questions: {
-		type: Sequelize.JSON
-	},
-	responses: {
-		type: Sequelize.JSON
 	}
 }, {
 	paranoid: true,
@@ -31,7 +25,6 @@ module.exports = DB.define('level_session', {
 	classMethods: {
 		init: function() {
 			Models.level_session.belongsTo(Models.user);
-			Models.level_session.belongsTo(Models.level);
 		},
 	},
 	instanceMethods: {

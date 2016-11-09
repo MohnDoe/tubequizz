@@ -91,11 +91,11 @@ module.exports = DB.define('user', {
             // associations can be defined herebr
 
             // a user is subed to many channels
-            Models.user.belongsToMany(Models.channel, {
-                as: 'subscriptions',
-                through: 'is_sub',
-                //foreign_key: 'user_id'
-            });
+            // Models.user.belongsToMany(Models.channel, {
+            //     as: 'subscriptions',
+            //     through: 'is_sub',
+            //     //foreign_key: 'user_id'
+            // });
         },
         generateHash: function(password) {
             return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
