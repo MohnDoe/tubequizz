@@ -22,13 +22,13 @@ promises.push(DB.init().then(function() {
 	})
 }));
 
-var Redis = require('./modules/redis');
-promises.push(Redis.init().then(function() {
-	console.log('Connected to Redis');
-	return new Promise(function(resolve, reject) {
-		return resolve();
-	})
-}));
+// var Redis = require('./modules/redis');
+// promises.push(Redis.init().then(function() {
+// 	console.log('Connected to Redis');
+// 	return new Promise(function(resolve, reject) {
+// 		return resolve();
+// 	})
+// }));
 
 Promise.all(promises).then(function() {
 	debugDB('Connected to Databases');
@@ -53,16 +53,16 @@ Promise.all(promises).then(function() {
 
 
 
-	console.log("Storing sessiondata in REDIS");
-	var RedisStore = require('connect-redis')(ExpressSession);
-	app.use(ExpressSession({
-		store: new RedisStore({
-			client: require("./modules/redis").client
-		}),
-		secret: Config.server.sessionSecret,
-		resave: false,
-		saveUninitialized: false,
-	}));
+	// console.log("Storing sessiondata in REDIS");
+	// var RedisStore = require('connect-redis')(ExpressSession);
+	// app.use(ExpressSession({
+	// 	store: new RedisStore({
+	// 		client: require("./modules/redis").client
+	// 	}),
+	// 	secret: Config.server.sessionSecret,
+	// 	resave: false,
+	// 	saveUninitialized: false,
+	// }));
 
 
 	//Start webserver
@@ -70,14 +70,14 @@ Promise.all(promises).then(function() {
 		console.log("Server listening on port %s", Config.server.port);
 	});
 
-		//Authorization module
-		require('./modules/auth/index').init();
+	//Authorization module
+	require('./modules/auth/index').init();
 
-		//Api endpoints
-		require('./modules/api').init();
+	//Api endpoints
+	require('./modules/api').init();
 
-		//Normal routing
-		require('./modules/routes');
+	//Normal routing
+	require('./modules/routes');
 
 }).catch(function(err) {
 	console.log(err);

@@ -1,0 +1,3 @@
+angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("directives/player.html","<div class=\"player\">\r\n    <div id=\"ytplayer\"></div>\r\n</div>");
+$templateCache.put("quizz/index.html","<div class=\"page-full\" id=\"page-quizz\">\r\n\r\n    <div >\r\n        <!-- <h3>{{Snip.snip.title}}</h3><br> -->\r\n        <player clip=\"Quizz.clipOptions\"></player>\r\n\r\n        <button ng-click=\"Quizz.nextClip()\">LOL</button>\r\n    </div>\r\n\r\n</div>");
+$templateCache.put("quizz/player.html","");}]);

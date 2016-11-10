@@ -33,6 +33,6 @@ module.exports = {
 			video_id: 'Lrb6OXa7phs',
 			start_time: 238712,
 			duration: 30000
-		}, ]
+		}]
 	}]
 }
