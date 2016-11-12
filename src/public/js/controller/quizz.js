@@ -1,8 +1,9 @@
 angular.module('App')
-    .controller('QuizzCtrl', function($rootScope, $state, Api) {
+    .controller('QuizzCtrl', function($rootScope, $state, Api, $timeout) {
 
         var scope = this;
         scope.loading = true;
+        scope.timer = 0; // in MS
 
         scope.clipOptions = {};
 
@@ -50,6 +51,8 @@ angular.module('App')
             scope.actualPosition = position;
             $rootScope.$emit('clipChanged', clip);
             scope.getAnswers();
+            scope.timer = 0;
+            var timerTimeout = $timeout(scope.onTimeout, 10);
         }
 
 
@@ -97,7 +100,9 @@ angular.module('App')
                 scope.answers[i] = scope.videos[i];
             }
             scope.answers[3] = {
-                id: scope.clips[scope.actualPosition].video_id,
+                id: {
+                    videoId: scope.clips[scope.actualPosition].video_id
+                },
                 snippet: {
                     title: scope.clips[scope.actualPosition].title,
                     thumbnails: {
@@ -111,8 +116,29 @@ angular.module('App')
             console.log(scope.answers);
         }
 
+        scope.answer = function(a) {
+            current_clip_id = scope.clips[scope.actualPosition].video_id;
+            if (current_clip_id == a) {
+                console.log("win");
+            } else {
+                console.log('lol');
+            }
+            scope.nextClip();
+        }
+
+
 
         scope.initClip(0);
         scope.getVideos();
+
+
+
+        scope.onTimeout = function() {
+            scope.timer++;
+            timerTimeout = $timeout(scope.onTimeout, 10);
+        }
+        scope.stopTimer = function() {
+            $timeout.cancel(timerTimeout);
+        }
 
     });
