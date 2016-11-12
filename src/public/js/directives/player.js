@@ -11,11 +11,6 @@ angular.module('App')
             },
             controllerAs: 'Player',
             bindToController: true,
-            link: function(scope, element, attrs) {
-                scope.$watchCollection('clip', function(newValue, oldValue) {
-                    console.log(newValue);
-                }, true);
-            },
             controller: function($scope, $element, $rootScope) {
                 var scope = this;
 
@@ -34,7 +29,7 @@ angular.module('App')
                 }
 
                 function initYoutube() {
-                    console.log('initYoutube');
+                    // console.log('initYoutube');
                     player = new YT.Player('ytplayer', {
                         height: '400',
                         width: '100%',
@@ -83,7 +78,7 @@ angular.module('App')
                 function changeClip(clip) {
                     player.destroy();
                     scope.clip = clip;
-                    console.log(scope.clip);
+                    // console.log(scope.clip);
                     initYoutube();
                 }
 
@@ -113,8 +108,8 @@ angular.module('App')
                     $timeout.cancel(restartTimer);
                     $interval.cancel(initInterval);
                 })
-                $rootScope.$on('clipChanged', function(e, a) {
-                    changeClip(a)
+                $rootScope.$on('clipChanged', function(e, c) {
+                    changeClip(c)
                 });
 
             }

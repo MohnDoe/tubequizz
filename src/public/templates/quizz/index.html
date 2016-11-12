@@ -5,6 +5,16 @@
         <player clip="Quizz.clipOptions"></player>
 
         <button ng-click="Quizz.nextClip()">LOL</button>
+        <div class="answers-container">
+        	
+        	<div class="answer-container" ng-repeat="a in Quizz.answers" data-id-video="a.id">
+        		
+        		<!-- <span>{{a.snippet.title}}</span> -->
+        		<img src="{{a.snippet.thumbnails.medium.url}}">
+
+        	</div>
+
+        </div>
     </div>
 
 </div>
