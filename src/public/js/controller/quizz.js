@@ -51,8 +51,7 @@ angular.module('App')
             scope.actualPosition = position;
             $rootScope.$emit('clipChanged', clip);
             scope.getAnswers();
-            scope.timer = 0;
-            var timerTimeout = $timeout(scope.onTimeout, 10);
+            scope.resetTimer();
         }
 
 
@@ -113,6 +112,7 @@ angular.module('App')
                 }
             }
             scope.answers = scope.shuffle(scope.answers);
+
             console.log(scope.answers);
         }
 
@@ -123,22 +123,36 @@ angular.module('App')
             } else {
                 console.log('lol');
             }
+            console.log(3000 - scope.timer);
             scope.nextClip();
         }
 
+        $rootScope.$on('clipStarted', function(e) {
+            console.log("e:clipStarted");
+            scope.startTimer();
+        });
 
+        scope.startTimer = function() {
+            scope.timer = 0;
+            scope.timerTimeout = $timeout(scope.onTimeout, 10);
+        }
+
+        scope.resetTimer = function() {
+            scope.stopTimer();
+            scope.timer = 0;
+        }
+
+        scope.onTimeout = function() {
+            scope.timer++;
+            scope.timerTimeout = $timeout(scope.onTimeout, 10);
+        }
+
+        scope.stopTimer = function() {
+            $timeout.cancel(scope.timerTimeout);
+        }
 
         scope.initClip(0);
         scope.getVideos();
 
-
-
-        scope.onTimeout = function() {
-            scope.timer++;
-            timerTimeout = $timeout(scope.onTimeout, 10);
-        }
-        scope.stopTimer = function() {
-            $timeout.cancel(timerTimeout);
-        }
 
     });
