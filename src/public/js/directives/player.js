@@ -20,6 +20,7 @@ angular.module('App')
                     console.log('loop started : st = ' + scope.clip.start_time + ' | duration = ' + scope.clip.duration);
                     player.seekTo(scope.clip.start_time / 1000, true);
                     // player.playVideo();
+                    $timeout.cancel(restartTimer);
                     restartTimer = $timeout(loop, scope.clip.duration);
                 }
 
