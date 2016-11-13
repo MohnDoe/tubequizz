@@ -3,9 +3,12 @@
     <div >
         <!-- <h3>{{Snip.snip.title}}</h3><br> -->
         <player clip="Quizz.clipOptions"></player>
-        <h1>{{Quizz.timer}}</h1>
-        <button ng-click="Quizz.nextClip()">LOL</button>
-        <div class="answers-container">
+        <div class="container-progress-bar">
+        	<div class="fill-progress-bar" style="width: {{Quizz.percentTimerLeft}}%;">
+        	</div>
+        	{{Quizz.potentialPoints}}
+        </div>
+        <div class="answers-container" ng-if="Quizz.answersLoaded">
         	
         	<div class="answer-container" ng-repeat="a in Quizz.answers">
         		<!-- <span>{{a.snippet.title}}</span> -->

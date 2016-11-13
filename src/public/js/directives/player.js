@@ -87,6 +87,7 @@ angular.module('App')
                     $timeout.cancel(restartTimer);
                     $interval.cancel(initInterval);
                 })
+
                 $rootScope.$on('clipChanged', function(e, c) {
                     changeClip(c)
                 });

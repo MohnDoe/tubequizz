@@ -45,12 +45,19 @@ angular.module('App')
 
         scope.answers = [];
 
+        scope.answersLoaded = false;
+
+        scope.percentTimerLeft = 100;
+        scope.potentialPoints = 300;
+
         scope.initClip = function(position) {
             clip = scope.clips[position];
             scope.clipOptions = clip;
             scope.actualPosition = position;
             $rootScope.$emit('clipChanged', clip);
-            scope.getAnswers();
+            if (position != 0) {
+                scope.getAnswers();
+            }
             scope.resetTimer();
         }
 
@@ -94,6 +101,7 @@ angular.module('App')
         }
 
         scope.getAnswers = function() {
+            scope.answersLoaded = false;
             scope.randomizeVideos();
             for (var i = 0; i < 3; i++) {
                 scope.answers[i] = scope.videos[i];
@@ -112,8 +120,8 @@ angular.module('App')
                 }
             }
             scope.answers = scope.shuffle(scope.answers);
-
-            console.log(scope.answers);
+            scope.answersLoaded = true;
+            // console.log(scope.answers);
         }
 
         scope.answer = function(a) {
@@ -123,7 +131,7 @@ angular.module('App')
             } else {
                 console.log('lol');
             }
-            console.log(3000 - scope.timer);
+            console.log(300 - scope.timer);
             scope.nextClip();
         }
 
@@ -134,7 +142,7 @@ angular.module('App')
 
         scope.startTimer = function() {
             scope.timer = 0;
-            scope.timerTimeout = $timeout(scope.onTimeout, 10);
+            scope.timerTimeout = $timeout(scope.onTimeout, 100);
         }
 
         scope.resetTimer = function() {
@@ -143,12 +151,59 @@ angular.module('App')
         }
 
         scope.onTimeout = function() {
+            // TODO : get rid of this
+            if (scope.timer >= scope.getChoiceDuraton()) {
+                scope.timeIsUp();
+                return;
+            }
             scope.timer++;
-            scope.timerTimeout = $timeout(scope.onTimeout, 10);
+            scope.updateUI();
+            scope.timerTimeout = $timeout(scope.onTimeout, 100);
+        }
+
+        scope.updatePercentTimerLeft = function() {
+            //TODO : make it less frequent
+            scope.percentTimerLeft = (scope.getChoiceDuraton() - (scope.timer)) / scope.getChoiceDuraton() * 100;
+            // console.log(scope.percentTimerLeft);
+        }
+
+
+        scope.updateUI = function() {
+            scope.updatePercentTimerLeft();
+            scope.updatePotentialPoints();
+        }
+
+        scope.calculatePotentialPoints = function() {
+            //TODO : calculate accordingly to the level
+            // return Math.round(scope.percentTimerLeft * 1.75);
+            var pointsForThisClip = 300;
+            potentialPoints = Math.round(pointsForThisClip - scope.timer * (pointsForThisClip / scope.getChoiceDuraton()));
+            return potentialPoints;
+
+        }
+
+        scope.getChoiceDuraton = function() {
+            var numberOfLevels = 10;
+            var minChoiceDuration = 100; //10 sec
+            var maxChoiceDuration = 300; // 30 sec
+            var currentLevel = 10;
+
+            b = (minChoiceDuration - maxChoiceDuration) / (numberOfLevels - 1);
+            c = b * (currentLevel - 1) + maxChoiceDuration;
+            // console.log(c);
+            return c;
+        }
+
+        scope.updatePotentialPoints = function() {
+            scope.potentialPoints = scope.calculatePotentialPoints();
         }
 
         scope.stopTimer = function() {
             $timeout.cancel(scope.timerTimeout);
+        }
+
+        scope.timeIsUp = function() {
+            scope.stopTimer();
         }
 
         scope.initClip(0);
