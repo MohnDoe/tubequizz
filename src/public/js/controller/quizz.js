@@ -175,18 +175,17 @@ angular.module('App')
 
         scope.calculatePotentialPoints = function() {
             //TODO : calculate accordingly to the level
-            // return Math.round(scope.percentTimerLeft * 1.75);
-            var pointsForThisClip = 300;
+            var pointsForThisClip = 300; // TODO : get points for a clip !
             potentialPoints = Math.round(pointsForThisClip - scope.timer * (pointsForThisClip / scope.getChoiceDuraton()));
             return potentialPoints;
 
         }
 
         scope.getChoiceDuraton = function() {
-            var numberOfLevels = 10;
-            var minChoiceDuration = 100; //10 sec
-            var maxChoiceDuration = 300; // 30 sec
-            var currentLevel = 10;
+            var numberOfLevels = 10; //TODO : get number of levels
+            var minChoiceDuration = 10 * 10; //10 sec
+            var maxChoiceDuration = 30 * 10; // 30 sec
+            var currentLevel = 1; // TODO : get current level
 
             b = (minChoiceDuration - maxChoiceDuration) / (numberOfLevels - 1);
             c = b * (currentLevel - 1) + maxChoiceDuration;
