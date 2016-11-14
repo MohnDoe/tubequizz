@@ -275,7 +275,7 @@ gulp.task('images', function(src) {
 		//https://github.com/sindresorhus/gulp-imagemin
 		.pipe(imagemin({
 			//PNG - 0-7 - default 3
-			optimizationLevel: 7,
+			optimizationLevel: 3,
 			//JPG - bool -> lossless jpg compression (bigger files)
 			progressive: false,
 			//GIF - bool - Interlace gif for progressive rendering.

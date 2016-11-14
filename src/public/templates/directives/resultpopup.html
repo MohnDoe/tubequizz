@@ -1,0 +1,12 @@
+<div>
+	<div class="result-popup result-correct" ng-show="ResultPopup.visible">
+		<h1 class="header">Bien jouej</h1>
+		<h5 class="points">+{{ResultPopup.infos.answer.points}} points</h5>
+		<div class="container-correct-answer"></div>
+		<div class="container-gif">
+			<img src="{{ResultPopup.urlGIF}}">
+		</div>
+		<button ng-click="ResultPopup.nextClip()">Prochain Clip</button>
+	</div>
+	<div class="result-overlay" ng-show="ResultPopup.visible"></div>
+</div>

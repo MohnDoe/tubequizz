@@ -88,6 +88,10 @@ angular.module('App')
                     $interval.cancel(initInterval);
                 })
 
+                $rootScope.$on('answerGiven', function(e) {
+                    player.pauseVideo();
+                })
+
                 $rootScope.$on('clipChanged', function(e, c) {
                     changeClip(c)
                 });

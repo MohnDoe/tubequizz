@@ -50,14 +50,43 @@ angular.module('App')
         scope.percentTimerLeft = 100;
         scope.potentialPoints = 300;
 
+        scope.userScore = 0;
+
+        scope.popupVisible = false;
+
+        scope.popupOptions = {
+            quizz: {
+                channel: 'wankil',
+                gifs: {
+                    correct: 8,
+                    wrong: 4
+                }
+            }
+        }
+
+        scope.popupInfos = {
+            answer: {
+                points: 10,
+                is_correct: true,
+                next: true
+            },
+            end_game: {
+
+            },
+            type: 'answer'
+        }
+
+
         scope.initClip = function(position) {
             clip = scope.clips[position];
             scope.clipOptions = clip;
             scope.actualPosition = position;
             $rootScope.$emit('clipChanged', clip);
+            scope.isTimeUp = false;
             if (position != 0) {
                 scope.getAnswers();
             }
+
             scope.resetTimer();
         }
 
@@ -125,20 +154,22 @@ angular.module('App')
         }
 
         scope.answer = function(a) {
+            scope.stopTimer();
+
             current_clip_id = scope.clips[scope.actualPosition].video_id;
             if (current_clip_id == a) {
-                console.log("win");
+                is_correct = true;
             } else {
-                console.log('lol');
+                is_correct = false;
             }
-            console.log(300 - scope.timer);
-            scope.nextClip();
+            scope.updateUserScore(is_correct);
+            $rootScope.$emit('answerGiven', {
+                is_correct: is_correct,
+                points: scope.userScore,
+                next: true
+            });
+            // scope.nextClip();
         }
-
-        $rootScope.$on('clipStarted', function(e) {
-            console.log("e:clipStarted");
-            scope.startTimer();
-        });
 
         scope.startTimer = function() {
             scope.timer = 0;
@@ -181,11 +212,19 @@ angular.module('App')
 
         }
 
+        scope.getScore = function() {
+            var potentialPoints = scope.calculatePotentialPoints();
+            return {
+                potentialPoints: potentialPoints,
+                wrongPoints: scope.isTimeUp ? -(300 / 2) : Math.round(-Math.abs(potentialPoints) / 1.5)
+            }
+        }
+
         scope.getChoiceDuraton = function() {
             var numberOfLevels = 10; //TODO : get number of levels
             var minChoiceDuration = 10 * 10; //10 sec
             var maxChoiceDuration = 30 * 10; // 30 sec
-            var currentLevel = 1; // TODO : get current level
+            var currentLevel = 10; // TODO : get current level
 
             b = (minChoiceDuration - maxChoiceDuration) / (numberOfLevels - 1);
             c = b * (currentLevel - 1) + maxChoiceDuration;
@@ -193,17 +232,41 @@ angular.module('App')
             return c;
         }
 
-        scope.updatePotentialPoints = function() {
-            scope.potentialPoints = scope.calculatePotentialPoints();
-        }
-
         scope.stopTimer = function() {
             $timeout.cancel(scope.timerTimeout);
         }
 
         scope.timeIsUp = function() {
+            scope.isTimeUp = true;
             scope.stopTimer();
+            scope.updateUserScore(false);
         }
+
+        scope.updateUserScore = function(is_correct) {
+            // console.log("updateUserScore");
+            score = scope.getScore();
+            // console.log(score);
+            if (is_correct) {
+                scope.userScore += score.potentialPoints;
+            } else {
+                scope.userScore += score.wrongPoints;
+            }
+        }
+
+        scope.updatePotentialPoints = function() {
+            scope.potentialPoints = scope.calculatePotentialPoints();
+        }
+
+        $rootScope.$on('nextClip', function(e) {
+            console.log('e:nextClip');
+            scope.nextClip();
+        });
+
+        $rootScope.$on('clipStarted', function(e) {
+            console.log("e:clipStarted");
+            scope.startTimer();
+        });
+
 
         scope.initClip(0);
         scope.getVideos();

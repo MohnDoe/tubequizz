@@ -1,7 +1,8 @@
 <div class="page-full" id="page-quizz">
-
     <div >
+		<resultpopup options="Quizz.popupOptions" infos="Quizz.popupInfos" visible="Quizz.popupVisible"></resultpopup>
         <!-- <h3>{{Snip.snip.title}}</h3><br> -->
+        {{Quizz.userScore}} points
         <player clip="Quizz.clipOptions"></player>
         <div class="container-progress-bar">
         	<div class="fill-progress-bar" style="width: {{Quizz.percentTimerLeft}}%;">
