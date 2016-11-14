@@ -62,6 +62,8 @@ angular.module('App')
 
         scope.userScore = 0;
 
+        scope.currentAnswersLoaded = false;
+
         scope.popup = {
             visible: false,
             options: {
@@ -89,6 +91,7 @@ angular.module('App')
 
 
         scope.initClip = function(position) {
+            scope.blurAnswers();
             clip = scope.level.clips[position];
             scope.clipOptions = clip;
             scope.actualPosition = position;
@@ -162,9 +165,18 @@ angular.module('App')
             }
             scope.currentAnswers = scope.shuffle(scope.currentAnswers);
             scope.currentAnswersLoaded = true;
+
+            $timeout(scope.unblur, 1000);
             // console.log(scope.currentAnswers);
         }
 
+        scope.unblur = function() {
+            scope.unblurAnswers = true;
+        }
+
+        scope.blurAnswers = function() {
+            scope.unblurAnswers = false;
+        }
         scope.answer = function(a) {
             scope.stopTimer();
 

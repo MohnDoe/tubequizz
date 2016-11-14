@@ -45,7 +45,8 @@ angular.module('App')
                         },
                         videoId: scope.clip.video_id,
                         events: {
-                            'onReady': function() {
+                            'onReady': function(e) {
+                                e.target.setVolume(75);
                                 console.log('e:ytplayer:onReady');
                                 //Scale player
                                 var containerWidth = $element[0].clientWidth;
