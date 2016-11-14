@@ -2,9 +2,23 @@
 <div class="page-full" id="page-quizz">
     <div >
 
-        {{Quizz.userScore}} points
         <div class="container-middle">
 	        <div class="container-player">
+	        	<div class="gradient-player"></div>
+	        	<div class="container-infos">
+	        		<div class="info info-level">
+	        			<span class="title">Niveau</span>
+	        			<span class="number">1</span>
+	        		</div>
+	        		<div class="info info-score">
+	        			<span class="title">Score</span>
+	        			<span class="number">{{Quizz.userScore | number}}</span>
+	        		</div>
+	        		<div class="info info-progress">
+	        			<span class="title">Progression</span>
+	        			<span class="number">1/5</span>
+	        		</div>
+	        	</div>
 	        	<player clip="Quizz.clipOptions"></player>
 	        </div>
 
@@ -13,16 +27,27 @@
 	        	<span class="points">+{{Quizz.potentialPoints}} pts</span>
 	        	</div>
 	        </div>
+
+	        <span class="question">De quelle video vient ce clip de Wankil Studio ?</span>
         	
         </div>
 
 
 
         <div class="answers-container" ng-show="Quizz.currentAnswersLoaded">
-        	<div class="answer-container" ng-repeat="a in Quizz.currentAnswers">
-        		<img src="{{a.snippet.thumbnails.medium.url}}" ng-click="Quizz.answer(a.id.videoId);">
-        	</div>
-        </div>
+        	<div class="answer-container" ng-repeat="a in Quizz.currentAnswers" ng-click="Quizz.answer(a.id.videoId);">
+	        	<div class="border-answer"></div>
+        		<div class="overlay-answer">
+        			<span class="select">Selectionner ce clip</span>
+        			<span class="title-video">{{a.snippet.title}}</span>
+        		</div>
+	        	<div class="container-infos">
+	        		<span class="title-video">{{a.snippet.title}}</span>
+	        	</div>
+	        		<div class="gradient-answer"></div>
+	        		<img class="answer-image" src="{{a.snippet.thumbnails.medium.url}}" >
+	        	</div>
+	        </div>
     </div>
 
 </div>
