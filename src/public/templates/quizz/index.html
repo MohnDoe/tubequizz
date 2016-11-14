@@ -1,22 +1,27 @@
+<resultpopup options="Quizz.popup.options" infos="Quizz.popup.infos" visible="Quizz.popup.visible"></resultpopup>	
 <div class="page-full" id="page-quizz">
     <div >
-		<resultpopup options="Quizz.popupOptions" infos="Quizz.popupInfos" visible="Quizz.popupVisible"></resultpopup>
-        <!-- <h3>{{Snip.snip.title}}</h3><br> -->
+
         {{Quizz.userScore}} points
-        <player clip="Quizz.clipOptions"></player>
-        <div class="container-progress-bar">
-        	<div class="fill-progress-bar" style="width: {{Quizz.percentTimerLeft}}%;">
-        	</div>
-        	{{Quizz.potentialPoints}}
-        </div>
-        <div class="answers-container" ng-if="Quizz.answersLoaded">
+        <div class="container-middle">
+	        <div class="container-player">
+	        	<player clip="Quizz.clipOptions"></player>
+	        </div>
+
+	        <div class="container-progress-bar">
+	        	<div class="fill-progress-bar" style="width: {{Quizz.percentTimerLeft}}%;">
+	        	<span class="points">+{{Quizz.potentialPoints}} pts</span>
+	        	</div>
+	        </div>
         	
-        	<div class="answer-container" ng-repeat="a in Quizz.answers">
-        		<!-- <span>{{a.snippet.title}}</span> -->
+        </div>
+
+
+
+        <div class="answers-container" ng-show="Quizz.currentAnswersLoaded">
+        	<div class="answer-container" ng-repeat="a in Quizz.currentAnswers">
         		<img src="{{a.snippet.thumbnails.medium.url}}" ng-click="Quizz.answer(a.id.videoId);">
-
         	</div>
-
         </div>
     </div>
 

@@ -1,20 +1,74 @@
 @charset 'UTF-8';
 
-.container-progress-bar{
-	height: 30px;
-	line-height: 30px;
-	width: 100%;
-	display:block;
-	background-color: #EEE;
+@import url(http://fonts.googleapis.com/css?family=Roboto);
 
-	.fill-progress-bar{
-		height: 100%;
-		position: relative;
-		float : left;
-		background-color: red;
-		
-	}
+@mixin meyer-reset {
+  html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+
+  // HTML5 display-role reset for older browsers
+  article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+  }
+  body {
+    line-height: 1;
+  }
+  ol, ul {
+    list-style: none;
+  }
+  blockquote, q {
+    quotes: none;
+  }
+  blockquote {
+    &:before, &:after {
+      content: "";
+      content: none;
+    }
+  }
+  q {
+    &:before, &:after {
+      content: "";
+      content: none;
+    }
+  }
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
 }
+
+@mixin shadow-material($level: 1) {
+  @if $level == 1 {box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);} 
+  @else if $level == 2 {box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);}
+  @else if $level == 3 {box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);}
+  @else if $level == 4 {box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);}
+  @else if $level == 5 {box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);}
+}
+
+@include meyer-reset;
+
+html, body
+{
+
+	font-family:"Roboto",sans-serif ! important;
+}
+.page-full
+{
+	background-color : #222;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0; right: 0;
+	bottom: 0; top: 0;
+}
+
+
 .result-overlay
 {
 	position:fixed;
@@ -47,7 +101,7 @@
 		display:block;
 		position: relative;
 		float: left;
-		
+
 		img
 		{
 			width:100%;
@@ -55,3 +109,87 @@
 		}
 	}
 }
+
+.container-middle
+{
+	width: 50%;
+	height: auto;
+	margin-left: calc(25%);
+
+	.container-player
+	{
+		width : 100%;
+		position: relative;
+		padding-bottom: 56.25%; /* 16:9 */
+		height: 0;
+		@include shadow-material(4);
+		margin-bottom: 20px;
+
+
+		iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.container-progress-bar{
+		height: 20px;
+		line-height: 20px;
+		width: 100%;
+		display:block;
+		background-color: #EEE;
+
+		.fill-progress-bar{
+			height: 100%;
+			position: relative;
+			float : left;
+			background-color: red;
+
+			.points{
+				display : block;
+				text-align: center;
+				font-size: 12px;
+				text-transform: uppercase;
+				font-weight: 400;
+			}
+			
+		}
+	}
+}
+
+.answers-container
+{
+	position : relative;
+	float : left;
+	margin-top : 20px;
+	width : 100%;
+
+	.answer-container
+	{
+		width : calc(25% - 40px);
+		position: relative;
+		margin-left: 20px;
+		margin-right : 20px;
+		height: auto;
+		float : left;
+		cursor: pointer;
+		padding: 0 0 0 -3px;
+
+		@include shadow-material(1);
+		transition: .275s;
+
+		&:hover
+		{
+			@include shadow-material(2);
+		}
+		img 
+		{
+			
+			width: 100%;
+		}
+	}
+}
+
