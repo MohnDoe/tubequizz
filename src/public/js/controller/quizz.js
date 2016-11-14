@@ -12,38 +12,39 @@ angular.module('App')
             clips_count: 5,
             clips_total: 500,
             clips: [{
-                title: "MUT MUT ÉCARTEZ-VOUS (Euro Truck Simulator 2)",
-                video_id: 'ADUJ87Wxyp4',
-                thumbnail: 'https://i.ytimg.com/vi/ADUJ87Wxyp4/mqdefault.jpg',
-                start_time: 181285,
-                duration: 19172,
+                title: "EMERIL LEGASSE - Bad Unboxing || 1Up Box [October 2015]",
+                video_id: 'v0Je3I23IlE',
+                thumbnail: 'https://i.ytimg.com/vi/v0Je3I23IlE/mqdefault.jpg',
+                start_time: 172415,
+                duration: 11553,
                 points: 300
             }, {
-                title: "ET MAINTENANT, FERME TA GUEULE (DayZ)",
-                video_id: '80jDpdh4wBc',
-                thumbnail: 'https://i.ytimg.com/vi/80jDpdh4wBc/mqdefault.jpg',
-                start_time: 466145,
-                duration: 18681,
+                title: "Content Cop - Leafy",
+                video_id: 'm4XahX7cuU8',
+                thumbnail: 'https://i.ytimg.com/vi/m4XahX7cuU8/mqdefault.jpg',
+                start_time: 393549,
+                duration: 12004,
                 points: 300
             }, {
-                title: "J'APPRENDRE LA SURVIE ET LA CONJUGAISON (H1Z1 Battle Royale)",
-                video_id: '--6EQeJqf8E',
-                thumbnail: 'https://i.ytimg.com/vi/--6EQeJqf8E/mqdefault.jpg',
-                start_time: 450593,
-                duration: 23160,
+                title: "I hate swedes - Bad Unboxing Fan Mail",
+                video_id: 'hVuSo_rEbrE',
+                thumbnail: 'https://i.ytimg.com/vi/hVuSo_rEbrE/mqdefault.jpg',
+                start_time: 459250,
+                duration: 10816,
                 points: 300
             }, {
-                title: "J'APPRENDRE LA SURVIE ET LA CONJUGAISON (H1Z1 Battle Royale)",
-                video_id: '--6EQeJqf8E',
-                thumbnail: 'https://i.ytimg.com/vi/--6EQeJqf8E/mqdefault.jpg',
-                start_time: 435170,
-                duration: 14830
+                title: "Bad Unboxing - Fan Mail (Feat. Garbage)",
+                video_id: 'mUXqGSxWpx4',
+                thumbnail: 'https://i.ytimg.com/vi/mUXqGSxWpx4/mqdefault.jpg',
+                start_time: 112351,
+                duration: 1641,
+                points: 300
             }, {
-                title: "ET J'AI CRAMÉ (Half-Life 2 en COOP)",
-                video_id: 'i-ELRMO3vHQ',
-                thumbnail: 'https://i.ytimg.com/vi/i-ELRMO3vHQ/mqdefault.jpg',
-                start_time: 701483,
-                duration: 5000,
+                title: "NOOSING MYSELF || Garbage fan mail - Bad Unboxing",
+                video_id: 'C1Mu9pmOue4',
+                thumbnail: 'https://i.ytimg.com/vi/C1Mu9pmOue4/mqdefault.jpg',
+                start_time: 86898,
+                duration: 8891,
                 points: 300
             }]
         };
@@ -112,7 +113,7 @@ angular.module('App')
 
         scope.getVideos = function() {
             Api.call({
-                url: 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyBMDrVhmiR2Av3cBfm2_RM7XVvD6udLwuo&channelId=UCYGjxo5ifuhnmvhPvCc3DJQ&part=snippet&order=date&maxResults=50&type=video',
+                url: 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyBMDrVhmiR2Av3cBfm2_RM7XVvD6udLwuo&channelId=UC4USoIAL9qcsx5nCZV_QRnA&part=snippet&order=date&maxResults=50&type=video',
                 method: 'GET',
                 callback: function(res) {
                     scope.videos = res.items;
