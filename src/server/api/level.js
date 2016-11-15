@@ -26,6 +26,7 @@ module.exports = {
         url: '/:channel/:id',
         method: 'get',
         handler: function(req, res, next) {
+            //TODO : shuffle clips and limit it
             res.status(200).json({
                 data: {
                     infos: QuizzRes[req.params.channel].infos,
