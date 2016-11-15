@@ -1,7 +1,7 @@
 {
     "number": 1,
     "clip_points": 300,
-    "clips_count": 100,
+    "clips_count": 10,
     "clips_used": 5,
     "clips": [{
         "title": "MUT MUT ÉCARTEZ-VOUS (Euro Truck Simulator 2)",
@@ -33,5 +33,6 @@
         "thumbnail": "https://i.ytimg.com/vi/i-ELRMO3vHQ/mqdefault.jpg",
         "start_time": 701483,
         "duration": 5000
-    }]
+    }],
+    "public": true
 }

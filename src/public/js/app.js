@@ -10,7 +10,11 @@ angular.module('App', ['templates', 'ui.router', 'ngAnimate', 'ngRoute', 'angula
     $locationProvider.html5Mode(true);
 
     $stateProvider
-        .state('quizz', {
+        .state('level', {
+            url: '/level/:channel/{level_id:int}',
+            templateUrl: 'level/index.html',
+            controller: 'LevelCtrl as Level'
+        }).state('quizz', {
             url: '/',
             templateUrl: 'quizz/index.html',
             controller: 'QuizzCtrl as Quizz'

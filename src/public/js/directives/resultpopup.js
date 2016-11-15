@@ -15,9 +15,9 @@ angular.module('App')
             bindToController: true,
             controller: function($scope, $element, $rootScope) {
                 var scope = this;
-
+                console.log(scope.options);
                 scope.getURLGif = function() {
-                    return './img/gif/' + scope.options.quizz.channel + '/' + (scope.infos.answer.is_correct ? 'correct' : 'wrong') + '/' + Math.floor(Math.random() * (scope.infos.answer.is_correct ? scope.options.quizz.gifs.correct : scope.options.quizz.gifs.wrong) + 1) + ".gif"
+                    return './img/gif/' + scope.options.quizz.slug + '/' + (scope.infos.answer.is_correct ? 'correct' : 'wrong') + '/' + Math.floor(Math.random() * (scope.infos.answer.is_correct ? scope.options.quizz.gifs_count.correct : scope.options.quizz.gifs_count.wrong) + 1) + ".gif"
                 }
 
                 scope.initURLGif = function() {

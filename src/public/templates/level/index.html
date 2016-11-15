@@ -1,4 +1,4 @@
-<resultpopup options="Quizz.popup.options" infos="Quizz.popup.infos" visible="Quizz.popup.visible"></resultpopup>	
+<resultpopup options="Level.popup.options" infos="Level.popup.infos" visible="Level.popup.visible"></resultpopup>	
 <div class="page-full" id="page-quizz">
     <div >
 
@@ -8,34 +8,34 @@
 	        	<div class="container-infos">
 	        		<div class="info info-level">
 	        			<span class="title">Niveau</span>
-	        			<span class="number">1</span>
+	        			<span class="number">{{Level.level.number}}</span>
 	        		</div>
 	        		<div class="info info-score">
 	        			<span class="title">Score</span>
-	        			<span class="number">{{Quizz.userScore | number}}</span>
+	        			<span class="number">{{Level.userScore | number}}</span>
 	        		</div>
 	        		<div class="info info-progress">
 	        			<span class="title">Progression</span>
-	        			<span class="number">1/5</span>
+	        			<span class="number">{{Level.actualPosition+1}}/{{Level.level.clips_used}}</span>
 	        		</div>
 	        	</div>
-	        	<player clip="Quizz.clipOptions"></player>
+	        	<player clip="Level.clipOptions"></player>
 	        </div>
 
 	        <div class="container-progress-bar">
-	        	<div class="fill-progress-bar" style="width: {{Quizz.percentTimerLeft}}%;">
-	        	<span class="points">+{{Quizz.potentialPoints}} pts</span>
+	        	<div class="fill-progress-bar" style="width: {{Level.percentTimerLeft}}%;">
+	        	<span class="points">+{{Level.potentialPoints}} pts</span>
 	        	</div>
 	        </div>
 
-	        <span class="question">De quelle video vient ce clip de Wankil Studio ?</span>
+	        <span class="question">De quelle video vient ce clip de {{Level.quizzInfos.channel_name}} ?</span>
         	
         </div>
 
 
 
-        <div class="answers-container" ng-show="Quizz.currentAnswersLoaded">
-        	<div class="answer-container" ng-repeat="a in Quizz.currentAnswers" ng-click="Quizz.answer(a.id.videoId);">
+        <div class="answers-container" ng-show="Level.currentAnswersLoaded">
+        	<div class="answer-container" ng-repeat="a in Level.currentAnswers" ng-click="Level.answer(a.id.videoId);">
 	        	<div class="border-answer"></div>
         		<div class="overlay-answer">
         			<span class="select">Selectionner ce clip</span>
@@ -45,7 +45,7 @@
 	        		<span class="title-video">{{a.snippet.title}}</span>
 	        	</div>
 	        		<div class="gradient-answer"></div>
-	        		<img class="answer-image" src="{{a.snippet.thumbnails.medium.url}}" ng-class="{'unblur' : Quizz.unblurAnswers}">
+	        		<img class="answer-image" src="{{a.snippet.thumbnails.medium.url}}" ng-class="{'unblur' : Level.unblurAnswers}">
 	        	</div>
 	        </div>
     </div>

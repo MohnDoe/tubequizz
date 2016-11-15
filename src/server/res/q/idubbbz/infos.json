@@ -6,7 +6,8 @@
 	"slug": "idubbbz",
 	"levels_count": 10,
 	"gifs_count": {
-		"correct": 8,
-		"wrong": 4
-	}
+		"correct": 0,
+		"wrong": 0
+	},
+	"public": true
 }

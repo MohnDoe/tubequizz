@@ -1,6 +1,5 @@
 angular.module('App')
-    .controller('QuizzCtrl', function($rootScope, $state, Api, $timeout) {
-
+    .controller('LevelCtrl', function($rootScope, $state, Api, $timeout, $stateParams) {
         var scope = this;
         scope.loading = true;
         scope.timer = 0; // in MS
@@ -27,28 +26,27 @@ angular.module('App')
         scope.popup = {
             visible: false,
             options: {
-                quizz: {
-                    channel: 'wankil',
-                    gifs: {
-                        correct: 8,
-                        wrong: 4
-                    },
-                    number_levels: 10
-                }
+                // quizz: {
+                //     channel: 'wankil',
+                //     gifs: {
+                //         correct: 8,
+                //         wrong: 4
+                //     },
+                //     level_count: 10
+                // }
             },
             infos: {
                 answer: {
-                    points: 10,
+                    points: 0,
                     is_correct: true,
                     next: true
                 },
-                end_game: {
-
-                },
+                end_game: {},
                 type: 'answer'
             }
         }
 
+        scope.quizzInfos = {};
 
         scope.initClip = function(position) {
             scope.blurAnswers();
@@ -58,7 +56,7 @@ angular.module('App')
             $rootScope.$emit('clipChanged', clip);
             scope.isTimeUp = false;
             if (position != 0) {
-                scope.getAnswers();
+                scope.initAnswers();
             }
 
             scope.resetTimer();
@@ -74,25 +72,33 @@ angular.module('App')
             }
         }
 
-        scope.getVideos = function() {
+        scope.initVideos = function() {
+            //TODO : do it via internal API
+            //TODO : remove current clip for result if
             Api.call({
-                url: 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyBMDrVhmiR2Av3cBfm2_RM7XVvD6udLwuo&channelId=UC4USoIAL9qcsx5nCZV_QRnA&part=snippet&order=date&maxResults=50&type=video',
+                url: 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyBMDrVhmiR2Av3cBfm2_RM7XVvD6udLwuo&channelId=' + scope.quizzInfos.channel_youtube_ID + '&part=snippet&order=date&maxResults=50&type=video',
                 method: 'GET',
                 callback: function(res) {
                     scope.videos = res.items;
-                    scope.getAnswers();
+                    scope.initAnswers();
                 }
             })
         }
-
-        scope.getLevel = function(level) {
+        scope.initLevel = function(level) {
             Api.call({
-                url: 'level/wankil/' + level,
+                url: 'level/' + $stateParams.channel + '/' + $stateParams.level_id,
                 callback: function(res) {
-                    scope.level = res.data.level;
-
-                    scope.initClip(0);
-                    scope.getVideos();
+                    console.log(res);
+                    if (res.status == "success" && res.data.level) {
+                        scope.level = res.data.level;
+                        scope.quizzInfos = res.data.infos;
+                        scope.popup.options.quizz = res.data.infos;
+                        console.log(scope.popup);
+                        scope.initClip(0);
+                        scope.initVideos();
+                    } else {
+                        console.log(res.message);
+                    }
                 }
             });
         }
@@ -116,7 +122,8 @@ angular.module('App')
             return a;
         }
 
-        scope.getAnswers = function() {
+        scope.initAnswers = function() {
+            //TODO : do this much better, dumb-dumb
             scope.currentAnswersLoaded = false;
             scope.randomizeVideos();
             for (var i = 0; i < 3; i++) {
@@ -217,7 +224,7 @@ angular.module('App')
         }
 
         scope.getChoiceDuraton = function() {
-            var numberOfLevels = scope.popup.options.quizz.number_levels;
+            var numberOfLevels = scope.quizzInfos.levels_count;
             var minChoiceDuration = 10 * 10; //10 sec
             var maxChoiceDuration = 30 * 10; // 30 sec
             var currentLevel = scope.level.number; // TODO : get current level
@@ -265,10 +272,6 @@ angular.module('App')
             scope.startTimer();
         });
 
-        scope.getLevel(1);
-
-        // scope.initClip(0);
-        // scope.getVideos();
-
+        scope.initLevel();
 
     });

@@ -13,13 +13,13 @@ angular.module('App')
             bindToController: true,
             controller: function($scope, $element, $rootScope) {
                 var scope = this;
-
+                scope.player = null;
                 var player, restartTimer, loopStarted, initInterval;
 
                 function loop() {
                     console.log('loop started : st = ' + scope.clip.start_time + ' | duration = ' + scope.clip.duration);
-                    player.seekTo(scope.clip.start_time / 1000, true);
-                    // player.playVideo();
+                    scope.player.seekTo(scope.clip.start_time / 1000, true);
+                    // scope.player.playVideo();
                     $timeout.cancel(restartTimer);
                     restartTimer = $timeout(loop, scope.clip.duration);
                 }
@@ -27,7 +27,7 @@ angular.module('App')
                 function initYoutube() {
                     // console.log('initYoutube');
                     loopStarted = false;
-                    player = new YT.Player('ytplayer', {
+                    scope.player = new YT.Player('ytplayer', {
                         height: '400',
                         width: '100%',
                         playerVars: {
@@ -50,14 +50,14 @@ angular.module('App')
                                 console.log('e:ytplayer:onReady');
                                 //Scale player
                                 var containerWidth = $element[0].clientWidth;
-                                player.getIframe().width = containerWidth;
-                                player.getIframe().height = containerWidth * 0.5625;
+                                e.target.getIframe().width = containerWidth;
+                                e.target.getIframe().height = containerWidth * 0.5625;
 
-                                player.seekTo(scope.clip.start_time / 1000, true);
-                                //player.playVideo();
+                                e.target.seekTo(scope.clip.start_time / 1000, true);
+                                //e.target.playVideo();
                             },
-                            'onStateChange': function() {
-                                if (player.getPlayerState() == 1 && !loopStarted) {
+                            'onStateChange': function(e) {
+                                if (scope.player.getPlayerState() == 1 && !loopStarted) {
                                     $rootScope.$emit('clipStarted');
                                     loopStarted = true;
                                     loop();
@@ -75,22 +75,25 @@ angular.module('App')
                 }, 25);
 
                 function changeClip(clip) {
-                    player.destroy();
-                    scope.clip = clip;
-                    // console.log(scope.clip);
-                    initYoutube();
+                    if (scope.player) {
+                        scope.player.destroy();
+                        scope.clip = clip;
+                        // console.log(scope.clip);
+                        initYoutube();
+
+                    }
                 }
 
                 $scope.$on('$destroy', function() {
                     console.log('e:$destroy');
 
-                    player.pauseVideo();
+                    scope.player.pauseVideo();
                     $timeout.cancel(restartTimer);
                     $interval.cancel(initInterval);
                 })
 
                 $rootScope.$on('answerGiven', function(e) {
-                    player.pauseVideo();
+                    scope.player.pauseVideo();
                 })
 
                 $rootScope.$on('clipChanged', function(e, c) {

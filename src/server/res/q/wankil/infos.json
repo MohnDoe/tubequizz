@@ -8,5 +8,6 @@
 	"gifs_count": {
 		"correct": 8,
 		"wrong": 4
-	}
+	},
+	"public": true
 }

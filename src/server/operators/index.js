@@ -4,5 +4,5 @@ module.exports = {
 	'video': require('./video'),
 	'score': require('./score'),
 	'level': require('./level'),
-	'channel': require('./channel')
+	'quizz': require('./quizz')
 }

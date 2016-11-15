@@ -1,7 +1,7 @@
 {
     "number": 1,
     "clip_points": 300,
-    "clips_count": 100,
+    "clips_count": 10,
     "clips_used": 5,
     "clips": [{
         "title": "EMERIL LEGASSE - Bad Unboxing || 1Up Box [October 2015]",
@@ -33,5 +33,6 @@
         "thumbnail": "https://i.ytimg.com/vi/C1Mu9pmOue4/mqdefault.jpg",
         "start_time": 86898,
         "duration": 8891
-    }]
+    }],
+    "public": true
 }
