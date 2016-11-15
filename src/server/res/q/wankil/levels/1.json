@@ -1,0 +1,37 @@
+{
+    "number": 1,
+    "clip_points": 300,
+    "clips_count": 100,
+    "clips_used": 5,
+    "clips": [{
+        "title": "MUT MUT ÉCARTEZ-VOUS (Euro Truck Simulator 2)",
+        "video_id": "ADUJ87Wxyp4",
+        "thumbnail": "https://i.ytimg.com/vi/ADUJ87Wxyp4/mqdefault.jpg",
+        "start_time": 181285,
+        "duration": 19172
+    }, {
+        "title": "ET MAINTENANT, FERME TA GUEULE (DayZ)",
+        "video_id": "80jDpdh4wBc",
+        "thumbnail": "https://i.ytimg.com/vi/80jDpdh4wBc/mqdefault.jpg",
+        "start_time": 466145,
+        "duration": 18681
+    }, {
+        "title": "J'APPRENDRE LA SURVIE ET LA CONJUGAISON (H1Z1 Battle Royale)",
+        "video_id": "--6EQeJqf8E",
+        "thumbnail": "https://i.ytimg.com/vi/--6EQeJqf8E/mqdefault.jpg",
+        "start_time": 450593,
+        "duration": 23160
+    }, {
+        "title": "J'APPRENDRE LA SURVIE ET LA CONJUGAISON (H1Z1 Battle Royale)",
+        "video_id": "--6EQeJqf8E",
+        "thumbnail": "https://i.ytimg.com/vi/--6EQeJqf8E/mqdefault.jpg",
+        "start_time": 435170,
+        "duration": 14830
+    }, {
+        "title": "ET J'AI CRAMÉ (Half-Life 2 en COOP)",
+        "video_id": "i-ELRMO3vHQ",
+        "thumbnail": "https://i.ytimg.com/vi/i-ELRMO3vHQ/mqdefault.jpg",
+        "start_time": 701483,
+        "duration": 5000
+    }]
+}

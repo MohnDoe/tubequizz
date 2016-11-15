@@ -74,7 +74,7 @@ Promise.all(promises).then(function() {
 	require('./modules/auth/index').init();
 
 	//Api endpoints
-	// require('./modules/api').init();
+	require('./modules/api').init();
 
 	//Normal routing
 	require('./modules/routes');

@@ -1,0 +1,37 @@
+{
+    "number": 1,
+    "clip_points": 300,
+    "clips_count": 100,
+    "clips_used": 5,
+    "clips": [{
+        "title": "EMERIL LEGASSE - Bad Unboxing || 1Up Box [October 2015]",
+        "video_id": "v0Je3I23IlE",
+        "thumbnail": "https://i.ytimg.com/vi/v0Je3I23IlE/mqdefault.jpg",
+        "start_time": 172415,
+        "duration": 11553
+    }, {
+        "title": "Content Cop - Leafy",
+        "video_id": "m4XahX7cuU8",
+        "thumbnail": "https://i.ytimg.com/vi/m4XahX7cuU8/mqdefault.jpg",
+        "start_time": 393549,
+        "duration": 12004
+    }, {
+        "title": "I hate swedes - Bad Unboxing Fan Mail",
+        "video_id": "hVuSo_rEbrE",
+        "thumbnail": "https://i.ytimg.com/vi/hVuSo_rEbrE/mqdefault.jpg",
+        "start_time": 459250,
+        "duration": 10816
+    }, {
+        "title": "Bad Unboxing - Fan Mail (Feat. Garbage)",
+        "video_id": "mUXqGSxWpx4",
+        "thumbnail": "https://i.ytimg.com/vi/mUXqGSxWpx4/mqdefault.jpg",
+        "start_time": 112351,
+        "duration": 1641
+    }, {
+        "title": "NOOSING MYSELF || Garbage fan mail - Bad Unboxing",
+        "video_id": "C1Mu9pmOue4",
+        "thumbnail": "https://i.ytimg.com/vi/C1Mu9pmOue4/mqdefault.jpg",
+        "start_time": 86898,
+        "duration": 8891
+    }]
+}

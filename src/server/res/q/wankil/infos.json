@@ -1,0 +1,12 @@
+{
+	"channel_name": "Wankil Studio",
+	"channel_banner_url": "",
+	"channel_picture_url": "",
+	"channel_youtube_ID": "UCYGjxo5ifuhnmvhPvCc3DJQ",
+	"slug": "wankil",
+	"levels_count": 10,
+	"gifs_count": {
+		"correct": 8,
+		"wrong": 4
+	}
+}
