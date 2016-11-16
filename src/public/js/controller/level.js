@@ -72,30 +72,28 @@ angular.module('App')
             }
         }
 
-        scope.initVideos = function() {
-            //TODO : do it via internal API
+        scope.getVideos = function() {
             //TODO : remove current clip for result if
             Api.call({
-                url: 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyBMDrVhmiR2Av3cBfm2_RM7XVvD6udLwuo&channelId=' + scope.quizzInfos.channel_youtube_ID + '&part=snippet&order=date&maxResults=50&type=video',
+                url: 'video/' + $stateParams.channel + '/' + $stateParams.level_id,
                 method: 'GET',
                 callback: function(res) {
-                    scope.videos = res.items;
+                    scope.videos = res.data.videos;
                     scope.initAnswers();
                 }
             })
         }
+
         scope.initLevel = function(level) {
             Api.call({
                 url: 'level/' + $stateParams.channel + '/' + $stateParams.level_id,
                 callback: function(res) {
-                    console.log(res);
                     if (res.status == "success" && res.data.level) {
                         scope.level = res.data.level;
                         scope.quizzInfos = res.data.infos;
                         scope.popup.options.quizz = res.data.infos;
-                        console.log(scope.popup);
                         scope.initClip(0);
-                        scope.initVideos();
+                        scope.getVideos();
                     } else {
                         console.log(res.message);
                     }
@@ -125,10 +123,13 @@ angular.module('App')
         scope.initAnswers = function() {
             //TODO : do this much better, dumb-dumb
             scope.currentAnswersLoaded = false;
-            scope.randomizeVideos();
-            for (var i = 0; i < 3; i++) {
-                scope.currentAnswers[i] = scope.videos[i];
-            }
+            // scope.randomizeVideos();
+            // for (var i = 0; i < 3; i++) {
+            //     scope.currentAnswers[i] = scope.videos[i];
+            // }
+
+            scope.initVideosForClip(scope.level.clips[scope.actualPosition].video_id);
+
             scope.currentAnswers[3] = {
                 id: {
                     videoId: scope.level.clips[scope.actualPosition].video_id
@@ -148,7 +149,12 @@ angular.module('App')
             $timeout(scope.unblur, 1000);
             // console.log(scope.currentAnswers);
         }
-
+        scope.initVideosForClip = function(clip_video_id) {
+            var videos = scope.videos[clip_video_id];
+            for (var i = 0; i < videos.videos.length; i++) {
+                scope.currentAnswers[i] = videos.videos[i];
+            }
+        }
         scope.unblur = function() {
             scope.unblurAnswers = true;
         }
