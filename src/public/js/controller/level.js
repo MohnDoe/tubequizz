@@ -130,30 +130,40 @@ angular.module('App')
 
             scope.initVideosForClip(scope.level.clips[scope.actualPosition].video_id);
 
-            scope.currentAnswers[3] = {
-                id: {
-                    videoId: scope.level.clips[scope.actualPosition].video_id
-                },
-                snippet: {
-                    title: scope.level.clips[scope.actualPosition].title,
-                    thumbnails: {
-                        medium: {
-                            url: scope.level.clips[scope.actualPosition].thumbnail
-                        }
-                    }
-                }
-            }
-            scope.currentAnswers = scope.shuffle(scope.currentAnswers);
-            scope.currentAnswersLoaded = true;
+            // scope.currentAnswers[3] = {
+            //     id: {
+            //         videoId: scope.level.clips[scope.actualPosition].video_id
+            //     },
+            //     snippet: {
+            //         title: scope.level.clips[scope.actualPosition].title,
+            //         thumbnails: {
+            //             medium: {
+            //                 url: scope.level.clips[scope.actualPosition].thumbnail
+            //             }
+            //         }
+            //     }
+            // }
+
 
             $timeout(scope.unblur, 1000);
             // console.log(scope.currentAnswers);
         }
         scope.initVideosForClip = function(clip_video_id) {
+            console.log('hey');
             var videos = scope.videos[clip_video_id];
             for (var i = 0; i < videos.videos.length; i++) {
                 scope.currentAnswers[i] = videos.videos[i];
             }
+            Api.call({
+                url: 'video/i/' + clip_video_id,
+                method: 'GET',
+                callback: function(res) {
+                    scope.currentAnswers[3] = res.data.video;
+                    scope.currentAnswers = scope.shuffle(scope.currentAnswers);
+                    scope.currentAnswersLoaded = true;
+                    console.log('yo');
+                }
+            });
         }
         scope.unblur = function() {
             scope.unblurAnswers = true;
@@ -163,6 +173,7 @@ angular.module('App')
             scope.unblurAnswers = false;
         }
         scope.answer = function(a) {
+            console.log(a);
             scope.stopTimer();
 
             current_clip_id = scope.level.clips[scope.actualPosition].video_id;

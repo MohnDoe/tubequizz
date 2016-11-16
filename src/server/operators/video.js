@@ -11,7 +11,6 @@ var QuizzRes = require('../res/q');
 var Google = require('googleapis');
 var Youtube = Google.youtube('v3');
 
-var levelOps = require('./level');
 // var OAuth2 = Google.auth.OAuth2;
 // var oauth2Client = new OAuth2(Config.auth.youtube.clientID, Config.auth.youtube.clientSecret, Config.auth.youtube.callbackURL);
 
@@ -27,7 +26,7 @@ function getVideosForClip(channel_id, clip_video_id) {
 				type: 'video',
 				channelId: QuizzRes[channel_id].infos.channel_youtube_ID,
 				auth: Config.auth.youtube.api_key,
-				maxResults: 15,
+				maxResults: 25,
 				relatedToVideoId: clip_video_id,
 			}, function(err, data) {
 				if (err) {
@@ -63,8 +62,26 @@ function getVideosForClip(channel_id, clip_video_id) {
 	})
 }
 
+function getVideoForClip(clip_video_id) {
+	return new Promise(function(resolve, reject) {
+		return Youtube.videos.list({
+			part: 'snippet, id',
+			id: clip_video_id,
+			auth: Config.auth.youtube.api_key,
+		}, function(err, data) {
+			if (err) {
+				console.log(err);
+				reject(err);
+			}
+			resolve(data.items[0]);
+		})
+	})
+}
+
 function getVideosForLevel(channel_id, level_id) {
 	return new Promise(function(resolve, reject) {
+		var levelOps = require('./level');
+
 		levelOps.getLevel(channel_id, level_id)
 			.then(function(level) {
 
@@ -95,5 +112,6 @@ function getVideosForLevel(channel_id, level_id) {
 
 module.exports = {
 	getVideosForClip: getVideosForClip,
+	getVideoForClip: getVideoForClip,
 	getVideosForLevel: getVideosForLevel
 }

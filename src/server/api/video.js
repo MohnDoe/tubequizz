@@ -13,6 +13,24 @@ module.exports = {
         }
     },
     custom: [{
+        url: '/i/:clip_video_id',
+        method: 'get',
+        handler: function(req, res, next) {
+            Ops.video.getVideoForClip(req.params.clip_video_id)
+                .then(function(video) {
+                    res.status(200).json({
+                        status: "success",
+                        data: {
+                            video: video
+                        }
+                    });
+
+                })
+                .catch(function(err) {
+                    console.log(err)
+                })
+        }
+    }, {
         url: '/:channel_id',
         method: 'get',
         handler: function(req, res, next) {
